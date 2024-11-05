@@ -3,6 +3,17 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
+import wandb
+
+run = wandb.init(
+    # Set the project where this run will be logged
+    project="my-awesome-project",
+    # Track hyperparameters and run metadata
+    config={
+        "learning_rate": 0.01,
+        "epochs": 10,
+    },
+)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
@@ -52,6 +63,8 @@ for epoch in range(n_epochs):
         loss.backward()
         optimizer.step()
         running_loss += loss.item()
+        wandb.log({"loss": loss})
+
 
     print(f"Epoch [{epoch+1}/{n_epochs}], Loss: {running_loss/len(train_loader):.4f}")
 model.eval()
