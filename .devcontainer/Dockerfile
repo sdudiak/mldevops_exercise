@@ -5,6 +5,3 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install --user -r /requirements.txt && \
     python3 -m pipx ensurepath && \
     pipx install poetry
-
-
-
