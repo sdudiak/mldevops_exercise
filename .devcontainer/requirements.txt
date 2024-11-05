@@ -1,0 +1,8 @@
+torch
+torchvision
+matplotlib
+black
+pre-commit
+pipx
+wandb
+optuna
